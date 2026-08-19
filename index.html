@@ -724,7 +724,13 @@
 
         @media (max-width: 430px) {
             .nav-links {
-                display: none;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+                gap: 8px 12px;
+            }
+
+            .nav-links a {
+                font-size: 11px;
             }
 
             .hero h1 {
