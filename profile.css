@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('2151825794.jpg');
+    background-size: 150% 150%, cover;
+    background-position: center;
+    animation: gradientBG 200s ease infinite;
+    overflow: hidden;
+
+}
+@keyframes gradientBG{
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.profile-card {
+    width: 420px;
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.profile-card .avatar img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255,255,255,0.6);
+    margin-bottom: 20px;
+}
+
+.profile-card h2 {
+    font-size: 26px;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.profile-card p {
+    font-size: 15px;
+    margin: 6px 0;
+    color: rgba(255,255,255,0.9);
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 25px;
+}
+
+.btn {
+    padding: 12px 20px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn.secondary {
+    background: rgba(0, 0, 0, 0.3);
+}
