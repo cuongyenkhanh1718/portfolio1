@@ -745,181 +745,6 @@
                 transition-duration: 0.01ms !important;
             }
         }
-
-        .music-player {
-            width: min(100%, 520px);
-            margin: 20px auto 0;
-            padding: 12px 16px 10px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 4px;
-            background: transparent;
-            color: #fff;
-            box-shadow: none;
-        }
-
-        .music-player.is-playing {
-            border-color: rgba(159, 196, 158, 0.7);
-        }
-
-        .music-heading {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 9px;
-            color: rgba(255, 255, 255, 0.84);
-            font-size: 11px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .music-title {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .music-time {
-            color: rgba(255, 255, 255, 0.54);
-            font-variant-numeric: tabular-nums;
-            letter-spacing: 0;
-        }
-
-        .music-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 18px;
-            min-height: 34px;
-        }
-
-        .music-volume {
-            width: 54px;
-            height: 4px;
-            accent-color: rgba(255, 255, 255, 0.7);
-            cursor: pointer;
-        }
-
-        .music-toggle {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            padding: 0;
-            border: 0;
-            border-radius: 50%;
-            background: #444;
-            color: #fff;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
-            transition: transform 0.2s ease, background 0.2s ease;
-        }
-
-        .music-progress {
-            flex: 1;
-            width: 100%;
-            height: 5px;
-            margin: 0;
-            accent-color: #b8d59d;
-            cursor: pointer;
-        }
-
-        .music-progress-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: rgba(255, 255, 255, 0.44);
-            font-size: 10px;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .music-action {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 22px;
-            height: 22px;
-            padding: 0;
-            border: 0;
-            background: transparent;
-            color: rgba(255, 255, 255, 0.48);
-            font-size: 17px;
-            cursor: pointer;
-            transition: color 0.2s ease, transform 0.2s ease;
-        }
-
-        .music-action:hover {
-            color: #fff;
-            transform: scale(1.12);
-        }
-
-        .music-progress::-webkit-slider-runnable-track {
-            height: 4px;
-            border-radius: 99px;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .music-progress::-webkit-slider-thumb {
-            width: 13px;
-            height: 13px;
-            margin-top: -4px;
-            border: 2px solid #d9edd5;
-            border-radius: 50%;
-            background: #709d73;
-            appearance: none;
-        }
-
-        .music-progress::-moz-range-track {
-            height: 4px;
-            border-radius: 99px;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .music-progress::-moz-range-thumb {
-            width: 11px;
-            height: 11px;
-            border: 2px solid #d9edd5;
-            border-radius: 50%;
-            background: #709d73;
-        }
-
-        .music-toggle:hover {
-            background: #5b5b5b;
-            transform: scale(1.05);
-        }
-
-        .music-toggle[aria-pressed="true"] {
-            background: #505050;
-            color: #fff;
-        }
-
-        .music-icon {
-            font-size: 15px;
-            line-height: 1;
-        }
-
-        .music-label,
-        .music-volume-label {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            overflow: hidden;
-            clip: rect(0 0 0 0);
-            white-space: nowrap;
-        }
-
-        @media (max-width: 600px) {
-            .music-player {
-                margin-top: 20px;
-                padding: 16px;
-            }
-
-            .music-controls {
-                gap: 14px;
-            }
-
-        }
     </style>
 </head>
 <body>
@@ -928,44 +753,12 @@
             <a class="brand" href="#top">TK<span>.</span></a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#music">Music</a></li>
                 <li><a href="#work">Work</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
 
         <main id="top">
-            <section class="section music-section" id="music">
-                <div class="section-heading">
-                    <div>
-                        <span class="section-kicker">01 / Soundtrack</span>
-                    </div>
-                </div>
-
-                <div class="music-player">
-                    <div class="music-heading">
-                        <span class="music-title">Dù Cho Mai Về Sau (Acoustic Version) / buitruonglinh</span>
-                    </div>
-                    <div class="music-controls">
-                        <button class="music-action" type="button" aria-label="Phát ngẫu nhiên">⤨</button>
-                        <button class="music-action" type="button" data-skip="-10" aria-label="Lùi 10 giây">|◀</button>
-                        <button class="music-toggle" type="button" aria-pressed="false" aria-label="Tiếp tục nhạc">
-                            <span class="music-icon" aria-hidden="true">▶</span>
-                            <span class="music-label">Tiếp tục</span>
-                        </button>
-                        <button class="music-action" type="button" data-skip="10" aria-label="Tiến 10 giây">▶|</button>
-                        <button class="music-action" type="button" aria-label="Thiết bị phát">▢</button>
-                    </div>
-                    <div class="music-progress-row">
-                        <span class="music-current">0:00</span>
-                        <input class="music-progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Tiến trình bài hát">
-                        <span class="music-duration">0:00</span>
-                        <span aria-hidden="true">🔊</span>
-                        <input class="music-volume" type="range" min="0" max="1" value="0.35" step="0.01" aria-label="Âm lượng">
-                    </div>
-                </div>
-            </section>
-
             <section class="hero">
                 <div class="hero-content">
                     <span class="eyebrow">Backend developer / Ninh Binh, Vietnam</span>
@@ -992,7 +785,7 @@
             <section class="section" id="about">
                 <div class="section-heading">
                     <div>
-                        <span class="section-kicker">02 / About</span>
+                        <span class="section-kicker">01 / About</span>
                         <h2>Clean code. Useful products.</h2>
                     </div>
                     <p>Simple solutions, reliable systems and details that matter.</p>
@@ -1019,7 +812,7 @@
             <section class="section" id="work">
                 <div class="section-heading">
                     <div>
-                        <span class="section-kicker">03 / Selected work</span>
+                        <span class="section-kicker">02 / Selected work</span>
                         <h2>Selected work.</h2>
                     </div>
                     <p>A few focused projects built with Python and Django.</p>
@@ -1060,155 +853,5 @@
             </nav>
         </footer>
     </div>
-
-    <script>
-        const musicToggle = document.querySelector('.music-toggle');
-        const musicIcon = document.querySelector('.music-icon');
-        const musicLabel = musicToggle.querySelector('.music-label');
-        const musicProgress = document.querySelector('.music-progress');
-        const musicPlayer = document.querySelector('.music-player');
-        const musicCurrent = document.querySelector('.music-current');
-        const musicDuration = document.querySelector('.music-duration');
-        const musicVolume = document.querySelector('.music-volume');
-        let audioContext;
-        let masterGain;
-        let musicTimer;
-        let customAudio;
-        const defaultMusicPath = 'duchomaivesau.mp3';
-
-        function playAmbientNote() {
-            const oscillator = audioContext.createOscillator();
-            const gain = audioContext.createGain();
-            const notes = [196, 246.94, 293.66, 329.63];
-            const note = notes[Math.floor(Math.random() * notes.length)];
-
-            oscillator.type = 'sine';
-            oscillator.frequency.value = note;
-            gain.gain.setValueAtTime(0, audioContext.currentTime);
-            gain.gain.linearRampToValueAtTime(0.12, audioContext.currentTime + 1.5);
-            gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 7);
-            oscillator.connect(gain).connect(masterGain);
-            oscillator.start();
-            oscillator.stop(audioContext.currentTime + 7);
-        }
-
-        async function toggleMusic() {
-            if (!customAudio) {
-                const defaultAudio = new Audio(defaultMusicPath);
-                defaultAudio.loop = true;
-                defaultAudio.autoplay = true;
-                defaultAudio.preload = 'auto';
-                defaultAudio.volume = 0.35;
-                try {
-                    customAudio = defaultAudio;
-                    connectMusicProgress();
-                    await defaultAudio.play();
-                } catch (error) {
-                    customAudio = null;
-                }
-            }
-
-            if (customAudio) {
-                if (customAudio.paused) {
-                    await customAudio.play();
-                    musicToggle.setAttribute('aria-pressed', 'true');
-                    musicToggle.setAttribute('aria-label', 'Tạm dừng nhạc');
-                    musicIcon.textContent = 'Ⅱ';
-                    musicLabel.textContent = 'Tạm dừng';
-                    musicPlayer.classList.add('is-playing');
-                } else {
-                    customAudio.pause();
-                    musicToggle.setAttribute('aria-pressed', 'false');
-                    musicToggle.setAttribute('aria-label', 'Tiếp tục nhạc');
-                    musicIcon.textContent = '▶';
-                    musicLabel.textContent = 'Tiếp tục';
-                    musicPlayer.classList.remove('is-playing');
-                }
-                return;
-            }
-
-            if (!audioContext) {
-                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-                if (!AudioContextClass) {
-                    musicLabel.textContent = 'Không hỗ trợ âm thanh';
-                    return;
-                }
-                audioContext = new AudioContextClass();
-                masterGain = audioContext.createGain();
-                masterGain.gain.value = 0.65;
-                masterGain.connect(audioContext.destination);
-            }
-
-            if (audioContext.state === 'suspended') {
-                await audioContext.resume();
-            }
-
-            if (musicToggle.getAttribute('aria-pressed') === 'false') {
-                masterGain.gain.setTargetAtTime(0.65, audioContext.currentTime, 0.2);
-                playAmbientNote();
-                musicTimer = setInterval(playAmbientNote, 3500);
-                musicToggle.setAttribute('aria-pressed', 'true');
-                musicToggle.setAttribute('aria-label', 'Tạm dừng nhạc');
-                musicIcon.textContent = 'Ⅱ';
-                musicLabel.textContent = 'Tạm dừng';
-                musicPlayer.classList.add('is-playing');
-            } else {
-                clearInterval(musicTimer);
-                masterGain.gain.setTargetAtTime(0, audioContext.currentTime, 0.2);
-                musicToggle.setAttribute('aria-pressed', 'false');
-                musicToggle.setAttribute('aria-label', 'Tiếp tục nhạc');
-                musicIcon.textContent = '▶';
-                musicLabel.textContent = 'Tiếp tục';
-                musicPlayer.classList.remove('is-playing');
-            }
-        }
-
-        function formatTime(seconds) {
-            if (!Number.isFinite(seconds)) return '0:00';
-            const minutes = Math.floor(seconds / 60);
-            const remainder = Math.floor(seconds % 60).toString().padStart(2, '0');
-            return `${minutes}:${remainder}`;
-        }
-
-        function connectMusicProgress() {
-            customAudio.addEventListener('loadedmetadata', () => {
-                musicProgress.max = customAudio.duration;
-                musicDuration.textContent = formatTime(customAudio.duration);
-            });
-            customAudio.addEventListener('timeupdate', () => {
-                musicProgress.value = customAudio.currentTime;
-                musicCurrent.textContent = formatTime(customAudio.currentTime);
-            });
-        }
-
-        musicProgress.addEventListener('input', () => {
-            if (customAudio && Number.isFinite(customAudio.duration)) {
-                customAudio.currentTime = musicProgress.value;
-            }
-        });
-
-        document.querySelectorAll('[data-skip]').forEach((button) => {
-            button.addEventListener('click', () => {
-                if (customAudio) {
-                    customAudio.currentTime = Math.max(0, Math.min(customAudio.duration, customAudio.currentTime + Number(button.dataset.skip)));
-                }
-            });
-        });
-
-        musicVolume.addEventListener('input', () => {
-            const volume = Number(musicVolume.value);
-            if (customAudio) customAudio.volume = volume;
-            if (masterGain) masterGain.gain.setTargetAtTime(volume * 1.85, audioContext.currentTime, 0.08);
-        });
-
-        musicToggle.addEventListener('click', toggleMusic);
-
-        toggleMusic().catch(() => {});
-        document.addEventListener('pointerdown', (event) => {
-            if (!event.target.closest('.music-toggle') && musicToggle.getAttribute('aria-pressed') === 'false') {
-                toggleMusic().catch(() => {});
-            }
-        }, { once: true });
-    </script>
 </body>
 </html>
