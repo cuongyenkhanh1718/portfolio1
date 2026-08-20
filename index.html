@@ -687,40 +687,11 @@
             touch-action: manipulation;
         }
 
-        .music-toggle {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 38px;
-            border: 0;
-            color: var(--paper);
-            background: transparent;
-            font: 500 12px 'DM Mono', monospace;
-            cursor: pointer;
-            transition: color 0.25s ease, background 0.25s ease, transform 0.25s ease;
-        }
-
-        .music-toggle {
-            gap: 8px;
-            padding: 8px 10px;
-            border-radius: 999px;
-        }
-
         .music-range {
             width: 110px;
             height: 24px;
             accent-color: var(--lime);
             cursor: pointer;
-        }
-
-        .music-toggle:hover {
-            color: var(--lime);
-            background: rgba(199, 243, 107, 0.08);
-            transform: translateY(-2px);
-        }
-
-        .music-toggle[aria-pressed="true"] {
-            color: var(--lime);
         }
 
         .music-volume {
@@ -818,10 +789,6 @@
         <source src="I MISS YOU -MR.Siro  Ver Cut - Thư ơi 🌹.mp3" type="audio/mpeg">
     </audio>
     <div class="music-controls" aria-label="Điều khiển âm lượng">
-        <button class="music-toggle" id="music-toggle" type="button" aria-label="Tắt nhạc" aria-pressed="true" title="Tắt hoặc bật nhạc">
-            <span aria-hidden="true">♫</span>
-            <span id="music-label">Nhạc đang bật</span>
-        </button>
         <input class="music-range" id="music-range" type="range" min="0" max="100" value="35" aria-label="Âm lượng nhạc" title="Điều chỉnh âm lượng">
         <span class="music-volume" id="music-volume" aria-live="polite">35%</span>
     </div>
@@ -932,8 +899,6 @@
     </div>
     <script>
         const backgroundMusic = document.getElementById('background-music');
-        const musicToggle = document.getElementById('music-toggle');
-        const musicLabel = document.getElementById('music-label');
         const musicRange = document.getElementById('music-range');
         const musicVolume = document.getElementById('music-volume');
         let musicGain = null;
@@ -971,41 +936,22 @@
             musicVolume.textContent = `${Math.round(getMusicVolume() * 100)}%`;
         }
 
-        function updateMusicButton() {
-            const isPlaying = !backgroundMusic.paused;
-            musicToggle.setAttribute('aria-pressed', String(isPlaying));
-            musicToggle.setAttribute('aria-label', isPlaying ? 'Tắt nhạc' : 'Bật nhạc');
-            musicLabel.textContent = isPlaying ? 'Nhạc đang bật' : 'Nhạc đang tắt';
-        }
-
         function startMusicAfterInteraction() {
             if (backgroundMusic.audioContext && backgroundMusic.audioContext.state === 'suspended') {
                 backgroundMusic.audioContext.resume();
             }
-            backgroundMusic.play().then(updateMusicButton).catch(updateMusicButton);
+            backgroundMusic.play().catch(() => {});
             document.removeEventListener('pointerdown', startMusicAfterInteraction);
             document.removeEventListener('keydown', startMusicAfterInteraction);
         }
-
-        musicToggle.addEventListener('click', () => {
-            if (backgroundMusic.paused) {
-                backgroundMusic.play().catch(() => {});
-            } else {
-                backgroundMusic.pause();
-            }
-            updateMusicButton();
-        });
 
         musicRange.addEventListener('input', () => {
             setMusicVolume(Number(musicRange.value) / 100);
             updateVolumeLabel();
         });
 
-        backgroundMusic.addEventListener('play', updateMusicButton);
-        backgroundMusic.addEventListener('pause', updateMusicButton);
         document.addEventListener('pointerdown', startMusicAfterInteraction, { once: true });
         document.addEventListener('keydown', startMusicAfterInteraction, { once: true });
-        updateMusicButton();
         updateVolumeLabel();
     </script>
 </body>
