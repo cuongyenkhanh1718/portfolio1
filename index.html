@@ -671,6 +671,35 @@
             margin-top: 0;
         }
 
+        .music-toggle {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 5;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 42px;
+            padding: 10px 14px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: var(--paper);
+            background: rgba(17, 21, 19, 0.82);
+            backdrop-filter: blur(12px);
+            font: 500 12px 'DM Mono', monospace;
+            cursor: pointer;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .music-toggle:hover {
+            border-color: var(--lime);
+            transform: translateY(-2px);
+        }
+
+        .music-toggle[aria-pressed="true"] {
+            color: var(--lime);
+        }
+
         @media (max-width: 760px) {
             .site-shell {
                 width: min(100% - 32px, 540px);
@@ -748,6 +777,13 @@
     </style>
 </head>
 <body>
+    <audio id="background-music" autoplay loop preload="auto">
+        <source src="I MISS YOU -MR.Siro  Ver Cut - Thư ơi 🌹.mp3" type="audio/mpeg">
+    </audio>
+    <button class="music-toggle" id="music-toggle" type="button" aria-label="Tắt nhạc" aria-pressed="true" title="Tắt hoặc bật nhạc">
+        <span aria-hidden="true">♫</span>
+        <span id="music-label">Nhạc đang bật</span>
+    </button>
     <div class="site-shell">
         <nav class="site-nav" aria-label="Main navigation">
             <a class="brand" href="#top">TK<span>.</span></a>
@@ -853,5 +889,38 @@
             </nav>
         </footer>
     </div>
+    <script>
+        const backgroundMusic = document.getElementById('background-music');
+        const musicToggle = document.getElementById('music-toggle');
+        const musicLabel = document.getElementById('music-label');
+
+        function updateMusicButton() {
+            const isPlaying = !backgroundMusic.paused;
+            musicToggle.setAttribute('aria-pressed', String(isPlaying));
+            musicToggle.setAttribute('aria-label', isPlaying ? 'Tắt nhạc' : 'Bật nhạc');
+            musicLabel.textContent = isPlaying ? 'Nhạc đang bật' : 'Nhạc đang tắt';
+        }
+
+        function startMusicAfterInteraction() {
+            backgroundMusic.play().then(updateMusicButton).catch(updateMusicButton);
+            document.removeEventListener('pointerdown', startMusicAfterInteraction);
+            document.removeEventListener('keydown', startMusicAfterInteraction);
+        }
+
+        musicToggle.addEventListener('click', () => {
+            if (backgroundMusic.paused) {
+                backgroundMusic.play().catch(() => {});
+            } else {
+                backgroundMusic.pause();
+            }
+            updateMusicButton();
+        });
+
+        backgroundMusic.addEventListener('play', updateMusicButton);
+        backgroundMusic.addEventListener('pause', updateMusicButton);
+        document.addEventListener('pointerdown', startMusicAfterInteraction, { once: true });
+        document.addEventListener('keydown', startMusicAfterInteraction, { once: true });
+        updateMusicButton();
+    </script>
 </body>
 </html>
