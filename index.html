@@ -940,9 +940,11 @@
             if (backgroundMusic.audioContext && backgroundMusic.audioContext.state === 'suspended') {
                 backgroundMusic.audioContext.resume();
             }
-            backgroundMusic.play().catch(() => {});
-            document.removeEventListener('pointerdown', startMusicAfterInteraction);
-            document.removeEventListener('keydown', startMusicAfterInteraction);
+            backgroundMusic.play().then(() => {
+                document.removeEventListener('pointerdown', startMusicAfterInteraction);
+                document.removeEventListener('touchstart', startMusicAfterInteraction);
+                document.removeEventListener('keydown', startMusicAfterInteraction);
+            }).catch(() => {});
         }
 
         musicRange.addEventListener('input', () => {
@@ -951,6 +953,7 @@
         });
 
         document.addEventListener('pointerdown', startMusicAfterInteraction, { once: true });
+        document.addEventListener('touchstart', startMusicAfterInteraction, { once: true, passive: true });
         document.addEventListener('keydown', startMusicAfterInteraction, { once: true });
         updateVolumeLabel();
     </script>
