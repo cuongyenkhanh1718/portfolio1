@@ -684,6 +684,7 @@
             border-radius: 999px;
             background: rgba(17, 21, 19, 0.82);
             backdrop-filter: blur(12px);
+            touch-action: manipulation;
         }
 
         .music-toggle,
@@ -935,15 +936,44 @@
     </div>
     <script>
         const backgroundMusic = document.getElementById('background-music');
-        backgroundMusic.volume = 0.35;
         const musicToggle = document.getElementById('music-toggle');
         const musicLabel = document.getElementById('music-label');
         const volumeDown = document.getElementById('volume-down');
         const volumeUp = document.getElementById('volume-up');
         const musicVolume = document.getElementById('music-volume');
+        let musicGain = null;
+
+        try {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (AudioContextClass) {
+                const audioContext = new AudioContextClass();
+                const musicSource = audioContext.createMediaElementSource(backgroundMusic);
+                musicGain = audioContext.createGain();
+                musicGain.gain.value = 0.35;
+                musicSource.connect(musicGain).connect(audioContext.destination);
+                backgroundMusic.volume = 1;
+                backgroundMusic.dataset.audioContext = 'ready';
+                backgroundMusic.audioContext = audioContext;
+            }
+        } catch (error) {
+            backgroundMusic.volume = 0.35;
+        }
+
+        function getMusicVolume() {
+            return musicGain ? musicGain.gain.value : backgroundMusic.volume;
+        }
+
+        function setMusicVolume(volume) {
+            const nextVolume = Math.max(0, Math.min(1, volume));
+            if (musicGain) {
+                musicGain.gain.value = nextVolume;
+            } else {
+                backgroundMusic.volume = nextVolume;
+            }
+        }
 
         function updateVolumeLabel() {
-            musicVolume.textContent = `${Math.round(backgroundMusic.volume * 100)}%`;
+            musicVolume.textContent = `${Math.round(getMusicVolume() * 100)}%`;
         }
 
         function updateMusicButton() {
@@ -954,6 +984,9 @@
         }
 
         function startMusicAfterInteraction() {
+            if (backgroundMusic.audioContext && backgroundMusic.audioContext.state === 'suspended') {
+                backgroundMusic.audioContext.resume();
+            }
             backgroundMusic.play().then(updateMusicButton).catch(updateMusicButton);
             document.removeEventListener('pointerdown', startMusicAfterInteraction);
             document.removeEventListener('keydown', startMusicAfterInteraction);
@@ -969,12 +1002,12 @@
         });
 
         volumeDown.addEventListener('click', () => {
-            backgroundMusic.volume = Math.max(0, backgroundMusic.volume - 0.1);
+            setMusicVolume(getMusicVolume() - 0.1);
             updateVolumeLabel();
         });
 
         volumeUp.addEventListener('click', () => {
-            backgroundMusic.volume = Math.min(1, backgroundMusic.volume + 0.1);
+            setMusicVolume(getMusicVolume() + 0.1);
             updateVolumeLabel();
         });
 
